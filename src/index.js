@@ -7,6 +7,8 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import PhraseGridView from "./components/PhraseGridView";
 import PlanGridView from "./components/PlanGridView";
 import PlanDetailedView from "./components/PlanDetailedView";
+import LessonGridView from "./components/LessonGridView";
+import LessonDetailedView from "./components/LessonDetailedView";
 
 const rootPath = 'http://localhost:8081'
 
@@ -23,6 +25,13 @@ root.render(
                           element={<PlanGridView rootPath={rootPath}/>}
                       />
                       <Route path=":planId" element={<PlanDetailedView rootPath={rootPath}/>}/>
+                  </Route>
+                  <Route path="lesson">
+                      <Route
+                          index
+                          element={<LessonGridView rootPath={rootPath}/>}
+                      />
+                      <Route path=":lessonId" element={<LessonDetailedView rootPath={rootPath}/>}/>
                   </Route>
                   <Route
                       path="*"

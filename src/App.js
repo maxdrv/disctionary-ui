@@ -11,8 +11,8 @@ function App() {
                   paddingBottom: "1rem"
               }}>
                   <Link to={"/phrase"}>Phrases</Link> {" "}
-                  <Link to={"/plan"}>Lesson plans</Link>
-                  {/*<Link to={"/lesson"}>Lessons</Link>*/}
+                  <Link to={"/plan"}>Lesson plans</Link> {" "}
+                  <Link to={"/lesson"}>Lessons</Link>
               </nav>
               <Outlet />
           </div>
