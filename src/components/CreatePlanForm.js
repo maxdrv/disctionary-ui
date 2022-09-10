@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 
-const CreatePlanForm = ({path, setChange, setPlanDetailedId}) => {
+const CreatePlanForm = ({rootPath, setChange}) => {
 
     const [createPlanFormData, setCreatePlanFormData] = useState({
         description: ''
@@ -24,12 +24,10 @@ const CreatePlanForm = ({path, setChange, setPlanDetailedId}) => {
             tags: []
         }
 
-        axios.post(path, req)
+        axios.post(`${rootPath}/api/v1/plan`, req)
             .then(response => {
                 console.log(response)
                 setChange(prev => !prev)
-                const createdPlanId = response.data.id
-                setPlanDetailedId(createdPlanId)
             })
             .catch(error => {
                 console.log(error)

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 
-const CreatePhraseForm = ({currentPlanPath, setChange}) => {
+const CreatePhraseForm = ({rootPath, setChange}) => {
 
     const [createPhraseFormData, setCreatePhraseFormData] = useState({
         source: '',
@@ -27,7 +27,7 @@ const CreatePhraseForm = ({currentPlanPath, setChange}) => {
 
         const createPhraseRequest = {...createPhraseFormData}
 
-        axios.put(`${currentPlanPath}/phrase`, createPhraseRequest)
+        axios.post(`${rootPath}/api/v1/phrase`, createPhraseRequest)
             .then(response => {
                 console.log(response.data)
                 setChange(prev => !prev)
