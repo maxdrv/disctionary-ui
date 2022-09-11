@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 import axios from "axios";
 import {offsetDateTimeToDateTime} from "./util/Util";
 import QueryNavLink from "./util/QueryNavLink";
+import IsActive from "./IsActive";
+import {activate} from "./repository/LessonService";
 
 const LessonGridView = ({rootPath}) => {
 
@@ -23,6 +25,19 @@ const LessonGridView = ({rootPath}) => {
             })
     }, [change])
 
+    const handleActivateClick = (event, lessonId) => {
+        event.preventDefault()
+        activate(event, lessonId)
+            .then(response => {
+                console.log(response)
+                setChange(prev => !prev)
+            })
+            .catch(error => {
+                console.log(error)
+                setErrMsg(error)
+            })
+    }
+
     return (
         <div>
             <table className={'table-common'}>
@@ -32,7 +47,8 @@ const LessonGridView = ({rootPath}) => {
                         <th className={'width-15'}>created at</th>
                         <th className={'width-15'}>updated at</th>
                         <th className={'width-15'}>start at</th>
-                        <th className={'width-10'}>status</th>
+                        <th className={'width-5'}>status</th>
+                        <th className={'width-5'}>active</th>
                         <th className={'width-10'}>parent plan id</th>
                         <th className={'width-25'}>description</th>
                     </tr>
@@ -61,9 +77,20 @@ const LessonGridView = ({rootPath}) => {
                                     <td>{offsetDateTimeToDateTime(lesson.updatedAt)}</td>
                                     <td>{offsetDateTimeToDateTime(lesson.startAt)}</td>
                                     <td>{lesson.status}</td>
-                                    <td>{lesson.parentPlanId}</td>
+                                    <td>
+                                        <IsActive isActive={lesson.active}/>
+                                    </td>
+                                    <td>
+                                        <Link to={`/plan/${lesson.parentPlanId}`}>{lesson.parentPlanId}</Link>
+                                    </td>
                                     <td>{lesson.description}</td>
-                                    <td/>
+                                    <td>
+                                        {
+                                            !lesson.active ?
+                                                <button type='button' onClick={(event) => handleActivateClick(event, lesson.id)}>Activate</button> :
+                                                null
+                                        }
+                                    </td>
                                 </tr>
                             )
                         }) :
