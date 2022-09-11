@@ -43,6 +43,18 @@ const PlanGridView = ({rootPath}) => {
             })
     }
 
+    function handleStartLessonClick(event, planId) {
+        event.preventDefault()
+
+        axios.post(`${rootPath}/api/v1/plan/${planId}/startLesson`)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
         <div>
             <CreatePlanFormV2 rootPath={rootPath} setChange={setChange}/>
@@ -82,6 +94,7 @@ const PlanGridView = ({rootPath}) => {
                                     <td>{plan.description}</td>
                                     <td>{plan.tags.map(tag => tag.key).join(',')}</td>
                                     <td>
+                                        <button type='button' onClick={(event) => handleStartLessonClick(event, plan.id)}>Start</button>
                                         <button type='button' onClick={(event) => handleDeleteClick(event, plan.id)}>Delete</button>
                                     </td>
                                 </tr>

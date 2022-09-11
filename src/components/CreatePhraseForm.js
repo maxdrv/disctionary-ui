@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 
-const CreatePhraseForm = ({rootPath, setChange}) => {
+const CreatePhraseForm = ({rootPath, setChange, planId}) => {
 
     const [createPhraseFormData, setCreatePhraseFormData] = useState({
         source: '',
         sourceLang: 'FR',
         transcription: '',
         target: '',
-        targetLang: 'RU'
+        targetLang: 'RU',
+        planId: planId
     })
 
     const handleCreatePhraseFormChanged = (event) => {
@@ -17,16 +18,12 @@ const CreatePhraseForm = ({rootPath, setChange}) => {
         const fieldName = event.target.name
         const fieldValue = event.target.value
 
-        console.log(fieldName)
-        console.log(fieldValue)
         setCreatePhraseFormData({...createPhraseFormData, [fieldName]: fieldValue})
     }
 
     const handleSubmitCreatePhraseForm = (event) => {
         event.preventDefault()
-
         const createPhraseRequest = {...createPhraseFormData}
-
         axios.post(`${rootPath}/api/v1/phrase`, createPhraseRequest)
             .then(response => {
                 console.log(response.data)

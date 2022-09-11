@@ -9,6 +9,7 @@ import PlanGridView from "./components/PlanGridView";
 import PlanDetailedView from "./components/PlanDetailedView";
 import LessonGridView from "./components/LessonGridView";
 import LessonDetailedView from "./components/LessonDetailedView";
+import CurrentLessonView from "./components/CurrentLessonView";
 
 const rootPath = 'http://localhost:8081'
 
@@ -33,6 +34,7 @@ root.render(
                       />
                       <Route path=":lessonId" element={<LessonDetailedView rootPath={rootPath}/>}/>
                   </Route>
+                  <Route path="currentLesson" element={<CurrentLessonView/>}/>
                   <Route
                       path="*"
                       element={

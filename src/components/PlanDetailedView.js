@@ -62,7 +62,7 @@ const PlanDetailedView = ({rootPath}) => {
                 }
                 </tbody>
             </table>
-            <PhraseGridView rootPath={rootPath} pathParams={[{name: 'planId', value: planId}]}/>
+            <PhraseGridView rootPath={rootPath} pathParams={[{name: 'planId', value: planId}]} planId={planId}/>
             {errMsg ? <ErrorMessage msg={errMsg}/> : null}
         </div>
     );

@@ -3,13 +3,12 @@ import axios from "axios";
 import PhraseRowEditable from "./PhraseRowEditable";
 import PhraseRowReadOnly from "./PhraseRowReadOnly";
 import ErrorMessage from "./ErrorMessage";
-import CreatePhraseFormV2 from "./CreatePhraseForm";
+import CreatePhraseForm from "./CreatePhraseForm";
 
-const PhraseGridView = ({rootPath, pathParams}) => {
-
+const PhraseGridView = ({rootPath, pathParams, planId}) => {
     const [errMsg, setErrMsg] = useState(null);
     const [change, setChange] = useState(false)
-    const [editPhraseFormData, setEditPhraseFormData] = useState(null)
+    const [editPhraseFormData, setEditPhraseFormData] = useState({})
     const [pageOfPhraseDto, setPageOfPhraseDto] = useState({})
     const [editPhraseId, setEditPhraseId] = useState(null)
 
@@ -83,7 +82,7 @@ const PhraseGridView = ({rootPath, pathParams}) => {
 
     return (
         <div>
-            <CreatePhraseFormV2 rootPath={rootPath} setChange={setChange}/>
+            <CreatePhraseForm rootPath={rootPath} setChange={setChange} planId={planId}/>
             <form onSubmit={handleSubmitEditPhraseForm}>
                 <table className={'table-common'}>
                     <thead>

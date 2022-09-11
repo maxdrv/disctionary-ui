@@ -12,7 +12,8 @@ function App() {
               }}>
                   <Link to={"/phrase"}>Phrases</Link> {" "}
                   <Link to={"/plan"}>Lesson plans</Link> {" "}
-                  <Link to={"/lesson"}>Lessons</Link>
+                  <Link to={"/lesson"}>Lessons</Link> {" "}
+                  <Link to={"/currentLesson"}>Current lesson</Link>
               </nav>
               <Outlet />
           </div>
