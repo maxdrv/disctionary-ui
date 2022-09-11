@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 
 const QuestionView = ({nextQuestion}) => {
 
-    const currentLessonItemId = nextQuestion.lessonItemId
-    const currentQuestion = nextQuestion.question
+    const lessonId = nextQuestion.lessonId
+    const lessonItemId = nextQuestion.question.lessonItemId
+    const question = nextQuestion.question.question
     const [answer, setAnswer] = useState("")
 
     const handleAnswerChanged = (event) => {
@@ -14,9 +15,9 @@ const QuestionView = ({nextQuestion}) => {
     return (
         <div>
             {
-                nextQuestion.question ?
+                question ?
                     <div>
-                        {currentQuestion}
+                        {question} {" "}
                         <input
                             type='text'
                             required='required'
@@ -25,7 +26,7 @@ const QuestionView = ({nextQuestion}) => {
                             onChange={handleAnswerChanged}
                             placeholder='enter your answer'
                         />
-                    </div> :
+                    </div>:
                     <div>no more questions</div>
             }
         </div>

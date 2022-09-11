@@ -23,7 +23,7 @@ const CurrentLessonView = (props) => {
     return (
         <div>
             {
-                currentLessonResponse.hasLesson ?
+                currentLessonResponse.context ?
                     <CurrentLessonContextView context={currentLessonResponse.context}/>:
                     <div>current lesson not found</div>
             }

@@ -30,7 +30,7 @@ const CurrentLessonContextView = ({context}) => {
                 </tbody>
             </table>
             <h2>Answer the question</h2>
-            <QuestionView nextQuestion={context}/>
+            <QuestionView nextQuestion={context.next}/>
             <h2>Done</h2>
         </div>
     )
