@@ -10,3 +10,7 @@ export function activate(event, lessonId) {
 export function currentLesson() {
     return axios.get(`${rootPath}/api/v1/currentLesson`)
 }
+
+export function postAnswer(lessonId, lessonItemId, answer) {
+    return axios.post(`${rootPath}/api/v1/lesson/${lessonId}/item/${lessonItemId}/answerAndGetContext`, answer)
+}
