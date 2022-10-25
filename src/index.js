@@ -10,6 +10,11 @@ import PlanDetailedView from "./components/PlanDetailedView";
 import LessonGridView from "./components/LessonGridView";
 import LessonDetailedView from "./components/LessonDetailedView";
 import CurrentLessonView from "./components/CurrentLessonView";
+import {disableReactDevTools} from "@fvilers/disable-react-devtools";
+
+if (process.env.NODE_ENV === 'production') {
+    disableReactDevTools()
+}
 
 const rootPath = 'http://localhost:8081'
 
