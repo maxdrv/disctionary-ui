@@ -1,9 +1,10 @@
-import React, {useEffect, useState, Fragment} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import axios from "axios";
 import PhraseRowEditable from "./PhraseRowEditable";
 import PhraseRowReadOnly from "./PhraseRowReadOnly";
 import ErrorMessage from "./ErrorMessage";
 import CreatePhraseForm from "./CreatePhraseForm";
+import {axiosPrivate} from "../api/axios";
 
 const PhraseGridView = ({rootPath, pathParams, planId}) => {
     const [errMsg, setErrMsg] = useState(null);
@@ -17,7 +18,7 @@ const PhraseGridView = ({rootPath, pathParams, planId}) => {
             `${rootPath}/api/v1/phrase?` + pathParams.map(pathParam => `${pathParam.name}=${pathParam.value}`).join('&') :
             `${rootPath}/api/v1/phrase`
 
-        axios.get(path)
+        axiosPrivate.get(path)
             .then(response => {
                 console.log(response)
                 setPageOfPhraseDto(response.data)

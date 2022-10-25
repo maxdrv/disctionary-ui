@@ -4,52 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import PhraseGridView from "./components/PhraseGridView";
-import PlanGridView from "./components/PlanGridView";
-import PlanDetailedView from "./components/PlanDetailedView";
-import LessonGridView from "./components/LessonGridView";
-import LessonDetailedView from "./components/LessonDetailedView";
-import CurrentLessonView from "./components/CurrentLessonView";
 import {disableReactDevTools} from "@fvilers/disable-react-devtools";
+import {AuthProvider} from "./context/AuthProvider";
 
 if (process.env.NODE_ENV === 'production') {
     disableReactDevTools()
 }
 
-const rootPath = 'http://localhost:8081'
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <BrowserRouter>
-          <Routes>
-              <Route path="/" element={<App />}>
-                  <Route path="phrase" element={<PhraseGridView rootPath={rootPath}/>} />
-                  <Route path="plan">
-                      <Route
-                          index
-                          element={<PlanGridView rootPath={rootPath}/>}
-                      />
-                      <Route path=":planId" element={<PlanDetailedView rootPath={rootPath}/>}/>
-                  </Route>
-                  <Route path="lesson">
-                      <Route
-                          index
-                          element={<LessonGridView rootPath={rootPath}/>}
-                      />
-                      <Route path=":lessonId" element={<LessonDetailedView rootPath={rootPath}/>}/>
-                  </Route>
-                  <Route path="currentLesson" element={<CurrentLessonView/>}/>
-                  <Route
-                      path="*"
-                      element={
-                          <main style={{ padding: "1rem" }}>
-                              <p>There's nothing here!</p>
-                          </main>
-                      }
-                  />
-              </Route>
-          </Routes>
+          <AuthProvider>
+              <Routes>
+                  <Route path='/*' element={<App/>}/>
+              </Routes>
+          </AuthProvider>
       </BrowserRouter>
 
   </React.StrictMode>
