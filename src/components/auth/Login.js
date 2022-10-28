@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import {useLocation, useNavigate} from "react-router-dom";
 import useInput from "../../hooks/useInput";
 import useToggle from "../../hooks/useToggle";
+import axios from "../../api/axios";
 
 const Login = (props) => {
     const { setAuth } = useAuth()
@@ -37,7 +37,7 @@ const Login = (props) => {
         }
 
         axios.post(
-            `http://localhost:8081/api/v1/auth/login`,
+            `/api/v1/auth/login`,
             req,
             {
                 headers: {'Content-Type': 'application/json'},

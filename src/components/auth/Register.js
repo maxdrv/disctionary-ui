@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useRef, useState} from 'react';
 import {faCheck, faInfoCircle, faTimes} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import axios from "axios";
+import axios from "../../api/axios";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z\d-_]{3,23}$/
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%]).{8,24}$/
@@ -62,7 +62,7 @@ const Register = (props) => {
             email: 'demo@gmail.com'
         }
 
-        axios.post(`http://localhost:8081/api/v1/auth/register`, req)
+        axios.post(`/api/v1/auth/register`, req)
             .then(response => {
                 console.log(response.data)
                 setSuccess(true)
