@@ -4,7 +4,6 @@ import {offsetDateTimeToDateTime} from "./util/Util";
 import ErrorMessage from "./ErrorMessage";
 import LessonItemGridView from "./LessonItemGridView";
 import IsActive from "./IsActive";
-import {activate} from "./repository/LessonService";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const LessonDetailedView = () => {
@@ -32,7 +31,7 @@ const LessonDetailedView = () => {
 
     const handleActivateClick = (event) => {
         event.preventDefault()
-        activate(event, lessonId)
+        axiosPrivate.post(`/api/v1/lesson/${lessonId}/activate`)
             .then(response => {
                 console.log(response)
                 setLessonDto(response.data)

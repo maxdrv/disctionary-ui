@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {currentLesson, postAnswer} from "./repository/LessonService";
 import {offsetDateTimeToDateTime} from "./util/Util";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const CurrentLessonView = (props) => {
+
+    const axiosPrivate = useAxiosPrivate();
 
     const [errMsg, setErrMsg] = useState(null);
     const [change, setChange] = useState(false)
@@ -10,7 +12,7 @@ const CurrentLessonView = (props) => {
     const [answerFormData, setAnswerFormData] = useState({answer: ""})
 
     useEffect(() => {
-        currentLesson()
+        axiosPrivate.get(`/api/v1/currentLesson`)
             .then(response => {
                 console.log(response)
                 setCurrentLessonResponse(response.data)
@@ -30,14 +32,13 @@ const CurrentLessonView = (props) => {
         setAnswerFormData({...answerFormData, [fieldName]: fieldValue})
     }
 
+
     const handleSubmitAnswerClick = (event) => {
         event.preventDefault()
 
-        postAnswer(
-                currentLessonResponse.context.next.lessonId,
-                currentLessonResponse.context.next.question.lessonItemId,
-            {...answerFormData}
-            )
+        const lessonId = currentLessonResponse.context.next.lessonId;
+        const lessonItemId = currentLessonResponse.context.next.question.lessonItemId;
+        axiosPrivate.post(`/api/v1/lesson/${lessonId}/item/${lessonItemId}/answerAndGetContext`, {...answerFormData})
             .then(response => {
                 console.log(response)
                 setCurrentLessonResponse(response.data)

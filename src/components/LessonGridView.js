@@ -4,7 +4,6 @@ import ErrorMessage from "./ErrorMessage";
 import {offsetDateTimeToDateTime} from "./util/Util";
 import QueryNavLink from "./util/QueryNavLink";
 import IsActive from "./IsActive";
-import {activate} from "./repository/LessonService";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const LessonGridView = ({rootPath}) => {
@@ -29,7 +28,7 @@ const LessonGridView = ({rootPath}) => {
 
     const handleActivateClick = (event, lessonId) => {
         event.preventDefault()
-        activate(event, lessonId)
+        axiosPrivate.post(`/api/v1/lesson/${lessonId}/activate`)
             .then(response => {
                 console.log(response)
                 setChange(prev => !prev)
