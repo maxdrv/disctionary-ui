@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import {Link, Outlet} from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
-import axios from "axios";
 import {offsetDateTimeToDateTime} from "./util/Util";
 import QueryNavLink from "./util/QueryNavLink";
 import IsActive from "./IsActive";
 import {activate} from "./repository/LessonService";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const LessonGridView = ({rootPath}) => {
+
+    const axiosPrivate = useAxiosPrivate();
 
     const [errMsg, setErrMsg] = useState(null);
     const [change, setChange] = useState(false)
     const [pageOfLessonDto, setPageOfLessonDto] = useState({})
 
     useEffect(() => {
-        axios.get(`${rootPath}/api/v1/lesson`)
+        axiosPrivate.get(`${rootPath}/api/v1/lesson`)
             .then(response => {
                 console.log(response)
                 setPageOfLessonDto(response.data)

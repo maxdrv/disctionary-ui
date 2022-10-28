@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import {offsetDateTimeToDateTime} from "./util/Util";
 import ErrorMessage from "./ErrorMessage";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const LessonItemGridView = ({rootPath, lessonId}) => {
+
+    const axiosPrivate = useAxiosPrivate();
 
     const [errMsg, setErrMsg] = useState(null);
     const [change, setChange] = useState(false)
     const [pageOfLessonItemDto, setPageOfLessonItemDto] = useState({})
 
     useEffect(() => {
-        axios.get(`${rootPath}/api/v1/lesson/${lessonId}/item`)
+        axiosPrivate.get(`${rootPath}/api/v1/lesson/${lessonId}/item`)
             .then(response => {
                 console.log(response)
                 setPageOfLessonItemDto(response.data)

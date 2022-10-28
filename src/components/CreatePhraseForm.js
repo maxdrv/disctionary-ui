@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import axios from "axios";
+import React, {useState} from 'react';
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const CreatePhraseForm = ({rootPath, setChange, planId}) => {
+const CreatePhraseForm = ({setChange, planId}) => {
+
+    const axiosPrivate = useAxiosPrivate();
 
     const [createPhraseFormData, setCreatePhraseFormData] = useState({
         source: '',
@@ -24,7 +26,7 @@ const CreatePhraseForm = ({rootPath, setChange, planId}) => {
     const handleSubmitCreatePhraseForm = (event) => {
         event.preventDefault()
         const createPhraseRequest = {...createPhraseFormData}
-        axios.post(`${rootPath}/api/v1/phrase`, createPhraseRequest)
+        axiosPrivate.post(`/api/v1/phrase`, createPhraseRequest)
             .then(response => {
                 console.log(response.data)
                 setChange(prev => !prev)

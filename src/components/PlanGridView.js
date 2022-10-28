@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import ErrorMessage from "./ErrorMessage";
 import {offsetDateTimeToDateTime} from "./util/Util";
 import CreatePlanFormV2 from "./CreatePlanForm";
 import QueryNavLink from "./util/QueryNavLink";
 import {Outlet} from "react-router-dom";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const PlanGridView = ({rootPath}) => {
+
+    const axiosPrivate = useAxiosPrivate();
 
     const [errMsg, setErrMsg] = useState(null);
     const [change, setChange] = useState(false)
@@ -19,7 +21,7 @@ const PlanGridView = ({rootPath}) => {
     })
 
     useEffect(() => {
-        axios.get(`${rootPath}/api/v1/plan`)
+        axiosPrivate.get(`${rootPath}/api/v1/plan`)
             .then(response => {
                 console.log(response)
                 setPageOfPlanDto(response.data)
@@ -33,7 +35,7 @@ const PlanGridView = ({rootPath}) => {
     const handleDeleteClick = (event, planId) => {
         event.preventDefault()
 
-        axios.delete(`${rootPath}/api/v1/plan/${planId}`)
+        axiosPrivate.delete(`${rootPath}/api/v1/plan/${planId}`)
             .then(response => {
                 console.log(response)
                 setChange(prev => !prev)
@@ -46,7 +48,7 @@ const PlanGridView = ({rootPath}) => {
     function handleStartLessonClick(event, planId) {
         event.preventDefault()
 
-        axios.post(`${rootPath}/api/v1/plan/${planId}/startLesson`)
+        axiosPrivate.post(`${rootPath}/api/v1/plan/${planId}/startLesson`)
             .then(response => {
                 console.log(response)
             })

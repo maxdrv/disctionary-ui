@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 import {offsetDateTimeToDateTime} from "./util/Util";
 import ErrorMessage from "./ErrorMessage";
 import LessonItemGridView from "./LessonItemGridView";
 import IsActive from "./IsActive";
 import {activate} from "./repository/LessonService";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const LessonDetailedView = ({rootPath}) => {
 
@@ -16,8 +16,10 @@ const LessonDetailedView = ({rootPath}) => {
     const [change, setChange] = useState(false)
     const [lessonDto, setLessonDto] = useState({})
 
+    const axiosPrivate = useAxiosPrivate();
+
     useEffect(() => {
-        axios.get(`${rootPath}/api/v1/lesson/${lessonId}`)
+        axiosPrivate.get(`${rootPath}/api/v1/lesson/${lessonId}`)
             .then(response => {
                 console.log(response)
                 setLessonDto(response.data)

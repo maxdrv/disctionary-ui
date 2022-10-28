@@ -1,22 +1,23 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import axios from "axios";
 import PhraseRowEditable from "./PhraseRowEditable";
 import PhraseRowReadOnly from "./PhraseRowReadOnly";
 import ErrorMessage from "./ErrorMessage";
 import CreatePhraseForm from "./CreatePhraseForm";
-import {axiosPrivate} from "../api/axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const PhraseGridView = ({rootPath, pathParams, planId}) => {
+const PhraseGridView = ({pathParams, planId}) => {
     const [errMsg, setErrMsg] = useState(null);
     const [change, setChange] = useState(false)
     const [editPhraseFormData, setEditPhraseFormData] = useState({})
     const [pageOfPhraseDto, setPageOfPhraseDto] = useState({})
     const [editPhraseId, setEditPhraseId] = useState(null)
 
+    const axiosPrivate = useAxiosPrivate();
+
     useEffect(() => {
         const path = pathParams ?
-            `${rootPath}/api/v1/phrase?` + pathParams.map(pathParam => `${pathParam.name}=${pathParam.value}`).join('&') :
-            `${rootPath}/api/v1/phrase`
+            `/api/v1/phrase?` + pathParams.map(pathParam => `${pathParam.name}=${pathParam.value}`).join('&') :
+            `/api/v1/phrase`
 
         axiosPrivate.get(path)
             .then(response => {
@@ -34,7 +35,7 @@ const PhraseGridView = ({rootPath, pathParams, planId}) => {
 
         const updatePhraseRequest = {...editPhraseFormData}
 
-        axios.put(`${rootPath}/api/v1/phrase/${editPhraseId}`, updatePhraseRequest)
+        axiosPrivate.put(`/api/v1/phrase/${editPhraseId}`, updatePhraseRequest)
             .then(response => {
                 console.log(response.data)
                 setChange(prev => !prev)
@@ -49,7 +50,7 @@ const PhraseGridView = ({rootPath, pathParams, planId}) => {
     const handleDeletePhraseClick = (event, phraseId) => {
         event.preventDefault()
 
-        axios.delete(`${rootPath}/api/v1/phrase/${phraseId}`)
+        axiosPrivate.delete(`/api/v1/phrase/${phraseId}`)
             .then(response => {
                 console.log(response)
                 setChange(prev => !prev)
@@ -83,7 +84,7 @@ const PhraseGridView = ({rootPath, pathParams, planId}) => {
 
     return (
         <div>
-            <CreatePhraseForm rootPath={rootPath} setChange={setChange} planId={planId}/>
+            <CreatePhraseForm setChange={setChange} planId={planId}/>
             <form onSubmit={handleSubmitEditPhraseForm}>
                 <table className={'table-common'}>
                     <thead>

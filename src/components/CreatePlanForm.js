@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
-import axios from "axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const CreatePlanForm = ({rootPath, setChange}) => {
+
+    const axiosPrivate = useAxiosPrivate();
 
     const [createPlanFormData, setCreatePlanFormData] = useState({
         description: ''
@@ -24,7 +26,7 @@ const CreatePlanForm = ({rootPath, setChange}) => {
             tags: []
         }
 
-        axios.post(`${rootPath}/api/v1/plan`, req)
+        axiosPrivate.post(`${rootPath}/api/v1/plan`, req)
             .then(response => {
                 console.log(response)
                 setChange(prev => !prev)

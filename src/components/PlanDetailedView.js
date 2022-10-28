@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import {useParams} from "react-router-dom";
 import {offsetDateTimeToDateTime} from "./util/Util";
 import PhraseGridView from "./PhraseGridView";
 import ErrorMessage from "./ErrorMessage";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const PlanDetailedView = ({rootPath}) => {
+    const axiosPrivate = useAxiosPrivate();
+
     const params = useParams()
     const planId = params.planId
 
@@ -20,7 +22,7 @@ const PlanDetailedView = ({rootPath}) => {
     })
 
     useEffect(() => {
-        axios.get(`${rootPath}/api/v1/plan/${planId}`)
+        axiosPrivate.get(`${rootPath}/api/v1/plan/${planId}`)
             .then(response => {
                 console.log(response)
                 setPlanDetailedView(response.data)
