@@ -7,7 +7,7 @@ import IsActive from "./IsActive";
 import {activate} from "./repository/LessonService";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const LessonDetailedView = ({rootPath}) => {
+const LessonDetailedView = () => {
 
     const params = useParams()
     const lessonId = params.lessonId
@@ -19,7 +19,7 @@ const LessonDetailedView = ({rootPath}) => {
     const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
-        axiosPrivate.get(`${rootPath}/api/v1/lesson/${lessonId}`)
+        axiosPrivate.get(`/api/v1/lesson/${lessonId}`)
             .then(response => {
                 console.log(response)
                 setLessonDto(response.data)
@@ -86,7 +86,7 @@ const LessonDetailedView = ({rootPath}) => {
                 }
                 </tbody>
             </table>
-            <LessonItemGridView rootPath={rootPath} lessonId={lessonId}/>
+            <LessonItemGridView lessonId={lessonId}/>
             {errMsg ? <ErrorMessage msg={errMsg}/> : null}
         </div>
     )

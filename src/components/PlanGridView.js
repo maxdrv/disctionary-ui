@@ -6,7 +6,7 @@ import QueryNavLink from "./util/QueryNavLink";
 import {Outlet} from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const PlanGridView = ({rootPath}) => {
+const PlanGridView = () => {
 
     const axiosPrivate = useAxiosPrivate();
 
@@ -21,7 +21,7 @@ const PlanGridView = ({rootPath}) => {
     })
 
     useEffect(() => {
-        axiosPrivate.get(`${rootPath}/api/v1/plan`)
+        axiosPrivate.get(`/api/v1/plan`)
             .then(response => {
                 console.log(response)
                 setPageOfPlanDto(response.data)
@@ -35,7 +35,7 @@ const PlanGridView = ({rootPath}) => {
     const handleDeleteClick = (event, planId) => {
         event.preventDefault()
 
-        axiosPrivate.delete(`${rootPath}/api/v1/plan/${planId}`)
+        axiosPrivate.delete(`/api/v1/plan/${planId}`)
             .then(response => {
                 console.log(response)
                 setChange(prev => !prev)
@@ -48,7 +48,7 @@ const PlanGridView = ({rootPath}) => {
     function handleStartLessonClick(event, planId) {
         event.preventDefault()
 
-        axiosPrivate.post(`${rootPath}/api/v1/plan/${planId}/startLesson`)
+        axiosPrivate.post(`/api/v1/plan/${planId}/startLesson`)
             .then(response => {
                 console.log(response)
             })
@@ -59,7 +59,7 @@ const PlanGridView = ({rootPath}) => {
 
     return (
         <div>
-            <CreatePlanFormV2 rootPath={rootPath} setChange={setChange}/>
+            <CreatePlanFormV2 setChange={setChange}/>
             <table className={'table-common'}>
                 <thead>
                 <tr>

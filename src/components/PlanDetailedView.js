@@ -5,7 +5,7 @@ import PhraseGridView from "./PhraseGridView";
 import ErrorMessage from "./ErrorMessage";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const PlanDetailedView = ({rootPath}) => {
+const PlanDetailedView = () => {
     const axiosPrivate = useAxiosPrivate();
 
     const params = useParams()
@@ -22,7 +22,7 @@ const PlanDetailedView = ({rootPath}) => {
     })
 
     useEffect(() => {
-        axiosPrivate.get(`${rootPath}/api/v1/plan/${planId}`)
+        axiosPrivate.get(`/api/v1/plan/${planId}`)
             .then(response => {
                 console.log(response)
                 setPlanDetailedView(response.data)
@@ -64,7 +64,7 @@ const PlanDetailedView = ({rootPath}) => {
                 }
                 </tbody>
             </table>
-            <PhraseGridView rootPath={rootPath} pathParams={[{name: 'planId', value: planId}]} planId={planId}/>
+            <PhraseGridView pathParams={[{name: 'planId', value: planId}]} planId={planId}/>
             {errMsg ? <ErrorMessage msg={errMsg}/> : null}
         </div>
     );
