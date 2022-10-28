@@ -4,6 +4,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import useInput from "../../hooks/useInput";
 import useToggle from "../../hooks/useToggle";
 import axios from "../../api/axios";
+import {StyledContainer} from "../styled/Container.styled";
 
 const Login = (props) => {
     const { setAuth } = useAuth()
@@ -71,6 +72,7 @@ const Login = (props) => {
     }
 
     return (
+        <StyledContainer>
         <section>
             <p ref={errRef} className={errMsg ? "errMsg" : "offscreen"} aria-live="assertive">
                 {errMsg}
@@ -99,7 +101,7 @@ const Login = (props) => {
                     required
                 />
                 <button>Sign In</button>
-                <div className="persistCheck">
+                <check>
                     <input
                         type="checkbox"
                         id="persist"
@@ -107,7 +109,7 @@ const Login = (props) => {
                         checked={check}
                     />
                     <label htmlFor="persist">Trust This Device</label>
-                </div>
+                </check>
             </form>
             <p>
                 Need an Account?<br/>
@@ -117,6 +119,8 @@ const Login = (props) => {
                 </span>
             </p>
         </section>
+
+        </StyledContainer>
     );
 }
 

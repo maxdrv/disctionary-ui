@@ -1,32 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+import styled from "styled-components";
 
-/** {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    box-sizing: border-box;*/
-/*}*/
+export const StyledContainer = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+  
+  box-sizing: border-box;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem 0.5rem;
 
-/*html {*/
-/*    font-family: 'Nunito', sans-serif;*/
-/*    font-size: 22px;*/
-/*    color: #fff;*/
-/*}*/
+  background-color: dodgerblue;
 
-/*body {*/
-/*    min-height: 100vh;*/
-/*    background-color: dodgerblue;*/
-/*}*/
-
-/*.App {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    min-height: 100vh;*/
-/*    padding: 1rem 0.5rem;*/
-/*}*/
-
-section {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  color: #fff;
+  
+  section {
     width: 100%;
     max-width: 420px;
     min-height: 400px;
@@ -35,44 +27,44 @@ section {
     justify-content: flex-start;
     padding: 1rem;
     background-color: rgba(0,0,0,0.4);
-}
+  }
 
-form {
+  form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     flex-grow: 1;
     padding-bottom: 1rem;
-}
+  }
 
-a, a:visited {
+  a, a:visited {
     color: #fff;
-}
+  }
 
-input[type="text"],
-input[type="password"],
-button,
-textarea {
+  input[type="text"],
+  input[type="password"],
+  button,
+  textarea {
     font-family: 'Nunito', sans-serif;
     font-size: 22px;
     padding: 0.25rem;
     border-radius: 0.5rem;
-}
+  }
 
-label,
-button {
+  label,
+  button {
     margin-top: 1rem;
-}
+  }
 
-button {
+  button {
     padding: 0.5rem;
-}
+  }
 
-li {
+  li {
     list-style-type: none;
-}
+  }
 
-.instructions {
+  .instructions {
     font-size: 0.75rem;
     border-radius: 0.5rem;
     background: #000;
@@ -80,65 +72,68 @@ li {
     padding: 0.25rem;
     position: relative;
     bottom: -10px;
-}
+  }
 
-.instructions > svg {
+  .instructions > svg {
     margin-right: 0.25rem;
-}
+  }
 
-.offscreen {
+  .offscreen {
     position: absolute;
     left: -9999px;
-}
+  }
 
-.hide {
+  .hide {
     display: none;
-}
+  }
 
-.valid {
+  .valid {
     color: limegreen;
     margin-left: 0.25rem;
-}
+  }
 
-.invalid {
+  .invalid {
     color: red;
     margin-left: 0.25rem;
-}
+  }
 
-.errmsg {
+  .errmsg {
     background-color: lightpink;
     color: firebrick;
     font-weight: bold;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
-}
+  }
 
-.line {
+  .line {
     display: inline-block;
-}
+  }
 
-.flexGrow {
+  .flexGrow {
     flex-grow: 1;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-}
+  }
 
 
-.persistCheck {
+  .persistCheck {
     font-size: 0.75rem;
     margin-top: 10px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-}
+  }
 
-.persistCheck label {
+  .persistCheck label {
     margin: 0;
-}
+  }
 
-[type="checkbox"] {
+  [type="checkbox"] {
     height: 20px;
     width: 20px;
     margin: 0 5px 2px 2px;
-}
+  }
+
+`
+

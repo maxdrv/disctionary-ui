@@ -1,5 +1,6 @@
 import {Link, useNavigate} from "react-router-dom";
 import useLogout from "../hooks/useLogout";
+import {StyledContainer} from "./styled/Container.styled";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const Home = () => {
     }
 
     return (
+        <StyledContainer>
         <section>
             <h1>Home</h1>
             <br />
@@ -29,6 +31,7 @@ const Home = () => {
                 <button onClick={signOut}>Sign Out</button>
             </div>
         </section>
+        </StyledContainer>
     )
 }
 

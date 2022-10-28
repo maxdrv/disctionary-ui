@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import {useLocation, useNavigate} from "react-router-dom";
+import {StyledContainer} from "./styled/Container.styled";
 
 const Users = () => {
     const [users, setUsers] = useState();
@@ -40,6 +41,7 @@ const Users = () => {
     }, [])
 
     return (
+        <StyledContainer>
         <article>
             <h2>Users List</h2>
             {users?.length
@@ -50,6 +52,7 @@ const Users = () => {
                 ) : <p>No users to display</p>
             }
         </article>
+            </StyledContainer>
     );
 };
 
